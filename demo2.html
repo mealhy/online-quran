@@ -10,9 +10,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Gold Glow */
+        .text-gold {
+            color: #D4AF37;
+        }
+
+        .bg-gold {
+            background-color: #D4AF37;
+        }
+
+        .border-gold {
+            border-color: #D4AF37;
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+            transform: translateY(-5px);
+        }
+
+        /* Sticky Header */
+        nav.sticky-active {
+            background-color: rgba(0, 0, 0, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #D4AF37;
         }
     </style>
 </head>
@@ -20,38 +62,69 @@
 <body class="bg-gray-900 text-white">
 
     <!-- Navigation -->
-    <nav class="bg-black shadow-lg sticky top-0 z-50 border-b border-red-600">
+    <nav id="main-nav" class="bg-black shadow-lg sticky top-0 z-50 border-b border-red-600 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0">
-                    <h1 class="text-2xl font-bold text-red-500">ONLINE QURAN ACADEMY</h1>
+                <div class="flex-shrink-0" data-aos="fade-down">
+                    <h1 class="text-2xl font-bold text-red-500 tracking-wider">ONLINE <span
+                            class="text-white">QURAN</span> ACADEMY</h1>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-6">
                         <a href="#services"
-                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition">COURSES</a>
+                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition tracking-wide">COURSES</a>
                         <a href="#about"
-                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition">ABOUT</a>
+                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition tracking-wide">ABOUT</a>
                         <a href="#testimonials"
-                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition">REVIEWS</a>
+                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition tracking-wide">REVIEWS</a>
                         <a href="#contact"
-                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition">CONTACT</a>
+                            class="text-gray-300 hover:text-red-500 px-3 py-2 text-sm font-semibold transition tracking-wide">CONTACT</a>
                     </div>
                 </div>
-                <div>
+                <div class="hidden md:block" data-aos="fade-left">
                     <a href="tel:123456789"
-                        class="bg-red-600 text-white px-6 py-3 rounded-md text-sm font-bold hover:bg-red-700 transition shadow-lg">ENROLL
+                        class="bg-red-600 text-white px-6 py-3 rounded-md text-sm font-bold hover:bg-red-700 transition shadow-lg hover-glow">ENROLL
                         NOW</a>
                 </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" aria-label="Open menu"
+                        class="text-white hover:text-red-500 focus:outline-none p-2">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-black/95 z-40 flex flex-col items-center justify-center space-y-8 md:hidden">
+            <button id="close-menu-btn" aria-label="Close menu"
+                class="absolute top-6 right-6 text-gray-400 hover:text-white">
+                <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="#services"
+                class="text-3xl font-bold text-white hover:text-red-500 transition mobile-link">COURSES</a>
+            <a href="#about" class="text-3xl font-bold text-white hover:text-red-500 transition mobile-link">ABOUT</a>
+            <a href="#testimonials"
+                class="text-3xl font-bold text-white hover:text-red-500 transition mobile-link">REVIEWS</a>
+            <a href="#contact"
+                class="text-3xl font-bold text-white hover:text-red-500 transition mobile-link">CONTACT</a>
+            <a href="tel:123456789"
+                class="bg-red-600 text-white px-8 py-4 rounded-lg text-xl font-bold hover:bg-red-700 transition shadow-lg mt-8">ENROLL
+                NOW</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-gray-900 via-black to-gray-900 py-20 md:py-32">
+    <section class="bg-gradient-to-br from-gray-900 via-black to-gray-900 py-20 md:py-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
+                <div data-aos="fade-right" data-aos-duration="1200">
                     <div class="inline-block bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
                         TRUSTED SINCE 2008</div>
                     <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Master the Quran with
@@ -60,16 +133,17 @@
                         one-on-one Quran classes.</p>
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a href="tel:123456789"
-                            class="bg-red-600 text-white px-10 py-5 rounded-lg text-lg font-bold hover:bg-red-700 transition text-center shadow-2xl">📞
+                            class="bg-red-600 text-white px-10 py-5 rounded-lg text-lg font-bold hover:bg-red-700 transition text-center shadow-2xl hover-glow">📞
                             CALL NOW</a>
                         <a href="https://wa.me/123456789"
-                            class="bg-green-600 text-white px-10 py-5 rounded-lg text-lg font-bold hover:bg-green-700 transition text-center shadow-2xl">💬
+                            class="bg-green-600 text-white px-10 py-5 rounded-lg text-lg font-bold hover:bg-green-700 transition text-center shadow-2xl hover-glow">💬
                             WHATSAPP</a>
                     </div>
                 </div>
-                <div>
+                <div data-aos="zoom-in" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&h=600&fit=crop"
-                        alt="Premium Online Quran Classes" class="rounded-xl shadow-2xl w-full border-4 border-red-600">
+                        alt="Premium Online Quran Classes"
+                        class="rounded-xl shadow-2xl w-full border-4 border-red-600 transform hover:scale-105 transition duration-500">
                 </div>
             </div>
         </div>
@@ -78,60 +152,63 @@
     <!-- Services Section -->
     <section id="services" class="py-20 md:py-32 bg-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">PREMIUM QURAN COURSES</h2>
                 <div class="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600 group"
+                    data-aos="fade-up" data-aos-delay="100">
                     <img src="https://www.equranschool.com/images/qaida-course.jpg" alt="Basic Noorani Qaida"
-                        class="w-full h-56 object-cover">
+                        class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-3">Basic Noorani Qaida</h3>
                         <p class="text-gray-400">Build a solid foundation with our comprehensive program.</p>
                     </div>
                 </div>
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600 group"
+                    data-aos="fade-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400&h=300&fit=crop"
-                        alt="Quran Reading" class="w-full h-56 object-cover">
+                        alt="Quran Reading"
+                        class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-3">Quran Reading</h3>
                         <p class="text-gray-400">Read fluently with confidence and proper pronunciation.</p>
                     </div>
                 </div>
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600 group"
+                    data-aos="fade-up" data-aos-delay="300">
                     <img src="https://www.equranschool.com/images/hifz-ul-quran-course.jpg" alt="Quran Memorization"
-                        class="w-full h-56 object-cover">
+                        class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-3">Quran Memorization</h3>
                         <p class="text-gray-400">Memorize with proven techniques and expert guidance.</p>
                     </div>
                 </div>
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600 group"
+                    data-aos="fade-up" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1585974738771-84483dd9f89f?w=400&h=300&fit=crop"
-                        alt="Quran Translation" class="w-full h-56 object-cover">
+                        alt="Quran Translation"
+                        class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-3">Quran Translation</h3>
                         <p class="text-gray-400">Understand the profound meanings of the Quran.</p>
                     </div>
                 </div>
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600 group"
+                    data-aos="fade-up" data-aos-delay="200">
                     <img src="https://www.equranschool.com/images/rules-of-tajweed-course.jpg" alt="Tajweed"
-                        class="w-full h-56 object-cover">
+                        class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-3">Rules of Tajweed</h3>
                         <p class="text-gray-400">Perfect your recitation with Tajweed mastery.</p>
                     </div>
                 </div>
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-gray-700 hover:border-red-600 group"
+                    data-aos="fade-up" data-aos-delay="300">
                     <img src="https://www.equranschool.com/images/islamic-studies-for-kids-course.jpg"
-                        alt="Islamic Studies" class="w-full h-56 object-cover">
+                        alt="Islamic Studies"
+                        class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-3">Islamic Studies for Kids</h3>
                         <p class="text-gray-400">Engaging Islamic education for young minds.</p>
@@ -144,34 +221,42 @@
     <!-- Why Choose Us -->
     <section class="py-20 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-extrabold text-white mb-4">WHY WE'RE THE BEST</h2>
                 <div class="w-24 h-1 bg-red-600 mx-auto"></div>
             </div>
             <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700">
-                    <div class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-red-600 transition duration-300 group"
+                    data-aos="flip-up" data-aos-delay="100">
+                    <div
+                        class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition">
                         <span class="text-3xl">✓</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-3">18+ Years</h3>
                     <p class="text-gray-400">Since 2008</p>
                 </div>
-                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700">
-                    <div class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-red-600 transition duration-300 group"
+                    data-aos="flip-up" data-aos-delay="200">
+                    <div
+                        class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition">
                         <span class="text-3xl">★</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-3">Elite Tutors</h3>
                     <p class="text-gray-400">Qualified instructors</p>
                 </div>
-                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700">
-                    <div class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-red-600 transition duration-300 group"
+                    data-aos="flip-up" data-aos-delay="300">
+                    <div
+                        class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition">
                         <span class="text-3xl">⏰</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-3">24/7 Access</h3>
                     <p class="text-gray-400">Anytime learning</p>
                 </div>
-                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700">
-                    <div class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div class="text-center bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-red-600 transition duration-300 group"
+                    data-aos="flip-up" data-aos-delay="400">
+                    <div
+                        class="bg-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-12 transition">
                         <span class="text-3xl">📞</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-3">Instant Support</h3>
@@ -182,20 +267,21 @@
     </section>
 
     <!-- About -->
-    <section id="about" class="py-20 bg-black">
+    <section id="about" class="py-20 bg-black overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
+                <div data-aos="fade-right">
                     <img src="https://images.unsplash.com/photo-1522661067900-ab829854a57f?w=800&h=600&fit=crop"
-                        alt="Academy" class="rounded-xl shadow-2xl w-full border-4 border-red-600">
+                        alt="Academy"
+                        class="rounded-xl shadow-2xl w-full border-4 border-red-600 transform hover:scale-105 transition duration-500">
                 </div>
-                <div>
+                <div data-aos="fade-left">
                     <h2 class="text-4xl font-extrabold text-white mb-6">ABOUT US</h2>
                     <div class="w-24 h-1 bg-red-600 mb-6"></div>
                     <p class="text-lg text-gray-300 mb-6">We believe every Muslim deserves quality Quran education.
                         Since 2008, we've guided thousands of students worldwide.</p>
                     <a href="#contact"
-                        class="inline-block bg-red-600 text-white px-10 py-4 rounded-lg font-bold hover:bg-red-700 transition">START
+                        class="inline-block bg-red-600 text-white px-10 py-4 rounded-lg font-bold hover:bg-red-700 transition hover-glow">START
                         LEARNING</a>
                 </div>
             </div>
@@ -205,12 +291,13 @@
     <!-- Testimonials -->
     <section id="testimonials" class="py-20 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-extrabold text-white mb-4">SUCCESS STORIES</h2>
                 <div class="w-24 h-1 bg-red-600 mx-auto"></div>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-red-600 transition duration-300"
+                    data-aos="zoom-in" data-aos-delay="100">
                     <div class="flex items-center mb-6">
                         <img src="https://i.pravatar.cc/100?img=1" alt="Sarah"
                             class="w-20 h-20 rounded-full mr-4 border-4 border-red-600">
@@ -221,7 +308,8 @@
                     </div>
                     <p class="text-gray-300">"Outstanding! My daughter's recitation improved dramatically!"</p>
                 </div>
-                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-red-600 transition duration-300"
+                    data-aos="zoom-in" data-aos-delay="200">
                     <div class="flex items-center mb-6">
                         <img src="https://i.pravatar.cc/100?img=12" alt="Mohammed"
                             class="w-20 h-20 rounded-full mr-4 border-4 border-red-600">
@@ -232,7 +320,8 @@
                     </div>
                     <p class="text-gray-300">"Best Tajweed course ever. Personalized attention!"</p>
                 </div>
-                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-red-600 transition duration-300"
+                    data-aos="zoom-in" data-aos-delay="300">
                     <div class="flex items-center mb-6">
                         <img src="https://i.pravatar.cc/100?img=5" alt="Fatima"
                             class="w-20 h-20 rounded-full mr-4 border-4 border-red-600">
@@ -248,16 +337,16 @@
     </section>
 
     <!-- CTA -->
-    <section class="py-20 bg-gradient-to-r from-red-600 to-red-800">
+    <section class="py-20 bg-gradient-to-r from-red-600 to-red-800" data-aos="fade-up">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h2 class="text-4xl font-extrabold text-white mb-6">READY TO BEGIN?</h2>
             <p class="text-2xl text-red-100 mb-10">Start your free trial today!</p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
                 <a href="tel:123456789"
-                    class="bg-black text-white px-12 py-6 rounded-lg text-xl font-bold hover:bg-gray-900 transition">📞
+                    class="bg-black text-white px-12 py-6 rounded-lg text-xl font-bold hover:bg-gray-900 transition hover-glow">📞
                     123456789</a>
                 <a href="https://wa.me/123456789"
-                    class="bg-green-600 text-white px-12 py-6 rounded-lg text-xl font-bold hover:bg-green-700 transition">💬
+                    class="bg-green-600 text-white px-12 py-6 rounded-lg text-xl font-bold hover:bg-green-700 transition hover-glow">💬
                     WHATSAPP</a>
             </div>
         </div>
@@ -266,12 +355,12 @@
     <!-- Contact -->
     <section id="contact" class="py-20 bg-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-extrabold text-white mb-4">GET IN TOUCH</h2>
                 <div class="w-24 h-1 bg-red-600 mx-auto"></div>
             </div>
             <div class="grid md:grid-cols-2 gap-12">
-                <div>
+                <div data-aos="fade-right">
                     <div class="space-y-6 mb-8">
                         <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
                             <p class="font-bold text-white">LOCATION</p>
@@ -321,6 +410,81 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top"
+        class="fixed bottom-8 right-8 bg-red-600 text-white p-3 rounded-full shadow-lg z-50 hover:bg-black border-2 border-gold transition-all duration-300 opacity-0 invisible">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-quart'
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            } else {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // Sticky Header & Back to Top Logic
+        const nav = document.getElementById('main-nav');
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('sticky-active');
+            } else {
+                nav.classList.remove('sticky-active');
+            }
+
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        // Smooth Scroll for Back to Top
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth Scroll for Internal Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
